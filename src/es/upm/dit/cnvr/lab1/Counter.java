@@ -115,15 +115,6 @@ public class Counter implements Watcher{
 		}
 	}
 	
-	private void printListMembers (List<String> list) {
-		System.out.println("Remaining # members:" + list.size());
-		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
-			String string = (String) iterator.next();
-			System.out.print(string + ", ");				
-		}
-		System.out.println();
-	}
-	
 	public static void main(String[] args) {
 		Counter zk = new Counter();
 		
