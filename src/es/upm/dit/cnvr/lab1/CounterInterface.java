@@ -9,9 +9,7 @@ import java.math.BigInteger;
 import java.util.Random;
 
 public class CounterInterface {
-
-    private int counterValue = 0;
-
+    
     private ZooKeeper zk;
     private String counter = "/counter";
 
@@ -44,18 +42,18 @@ public class CounterInterface {
 
 
 
-    public void readCounter() {
-        try{
-            // Init counter
-            Stat counterStat = zk.exists(counter, watcherCounter);
-            byte[] data = zk.getData(counter,watcherCounter, counterStat);
-            int value = new BigInteger(data).intValue();
-
-        } catch (Exception e) {
-            System.out.println("Exception in readCounter: " + e);
-        }
-
-    }
+//    public void readCounter() {
+//        try{
+//            // Init counter
+//            Stat counterStat = zk.exists(counter, watcherCounter);
+//            byte[] data = zk.getData(counter,watcherCounter, counterStat);
+//            int value = new BigInteger(data).intValue();
+//
+//        } catch (Exception e) {
+//            System.out.println("Exception in readCounter: " + e);
+//        }
+//
+//    }
 
 
     public void increment(){
@@ -95,10 +93,7 @@ public class CounterInterface {
         public void process(WatchedEvent event) {
             System.out.println("------------------Watcher Counter------------------\n");
             try {
-
-                System.out.println("        Update!!");
-
-
+                System.out.println("        Incremented!!");
             } catch (Exception e) {
                 System.out.println("Exception: watcherCounter");
             }
@@ -107,9 +102,7 @@ public class CounterInterface {
 
     public static void main(String[] args) {
         CounterInterface c = new CounterInterface();
-        c.readCounter();
         c.increment();
-        c.readCounter();
 
     }
 

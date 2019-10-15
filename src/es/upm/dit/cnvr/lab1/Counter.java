@@ -19,8 +19,7 @@ public class Counter implements Watcher{
 	private static final int SESSION_TIMEOUT = 5000;
 
 	private String counter = "/counter";
-	private int version;
-	
+
 	// This is static. A list of zookeeper can be provided for decide where to connect
 	String[] hosts = {"127.0.0.1:2181", "127.0.0.1:2181", "127.0.0.1:2181"};
 
@@ -96,7 +95,7 @@ public class Counter implements Watcher{
 			System.out.println("------------------Watcher Counter------------------\n");
 			try {
 				System.out.println("        Update!!");
-				                Stat counterStat = zk.exists(counter, watcherCounter);
+				Stat counterStat = zk.exists(counter, watcherCounter);
                 byte[] data = zk.getData(counter,watcherCounter, counterStat);
                 int value = new BigInteger(data).intValue();
                 System.out.println("Value: " + value);
