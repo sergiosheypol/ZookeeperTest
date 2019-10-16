@@ -66,7 +66,7 @@ public class CounterInterface {
     }
 
     public void prompt() {
-        System.out.println("How much do you want to increase the counter? If no value specified, +1");
+        System.out.println("How much do you want to increase the counter?");
     }
 
     // Notified when the session is created
