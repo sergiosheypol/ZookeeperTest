@@ -7,6 +7,7 @@ import org.apache.zookeeper.data.Stat;
 
 import java.math.BigInteger;
 import java.util.Random;
+import java.util.Scanner;
 
 public class CounterInterface {
 
@@ -40,23 +41,7 @@ public class CounterInterface {
         }
     }
 
-
-
-//    public void readCounter() {
-//        try{
-//            // Init counter
-//            Stat counterStat = zk.exists(counter, watcherCounter);
-//            byte[] data = zk.getData(counter,watcherCounter, counterStat);
-//            int value = new BigInteger(data).intValue();
-//
-//        } catch (Exception e) {
-//            System.out.println("Exception in readCounter: " + e);
-//        }
-//
-//    }
-
-
-    public void increment(){
+    public void increment(int amount){
 
         try{
             // Init counter
@@ -65,7 +50,7 @@ public class CounterInterface {
             byte[] data = zk.getData(counter,watcherCounter, counterStat);
             int value = new BigInteger(data).intValue();
 
-            value = value + 1;
+            value = value + amount;
 
             byte[] vByte = BigInteger.valueOf(value).toByteArray();
 
@@ -78,6 +63,10 @@ public class CounterInterface {
             System.out.println("Error: " + e);
         }
 
+    }
+
+    public void prompt() {
+        System.out.println("How much do you want to increase the counter? If no value specified, +1");
     }
 
     // Notified when the session is created
@@ -102,7 +91,28 @@ public class CounterInterface {
 
     public static void main(String[] args) {
         CounterInterface c = new CounterInterface();
-        c.increment();
+        Scanner keyboard = new Scanner(System.in);
+
+        while (true) {
+
+            c.prompt();
+            int input;
+
+            try {
+                input = keyboard.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid input");
+                keyboard = new Scanner(System.in);
+                continue;
+            }
+
+            if (input == 0) {
+                continue;
+            }
+
+            c.increment(input);
+
+        }
 
     }
 

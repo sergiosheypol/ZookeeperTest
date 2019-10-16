@@ -114,7 +114,7 @@ public class Counter implements Watcher{
 			System.out.println("Unexpected exception. Process of the object");
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		Counter zk = new Counter();
 		
